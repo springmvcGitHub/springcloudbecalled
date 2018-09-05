@@ -1,0 +1,25 @@
+server:
+  servlet:
+    context-path: /testB
+  port: 8092
+spring:
+  application:
+    name: s2
+eureka:
+  client:
+    register-with-eureka: true
+    #是否检索服务,如果设置为false的话，可能会出现生产者404的情况
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8090/regist/eureka/
+#使用feign断路器必须增加该配置(Spring Cloud之前的Brixton版本中，Feign是缺省是自动激活了断路器的，但最近的Dalston版本已经将缺省配置修改为禁止)
+#feign默认是启用hystrix的，如果要禁用的话需要加配置语句
+feign:
+  hystrix:
+    enabled:  true
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 3000
+  #请求连接的超时时间
+  ConnectTimeout: 5000
+aa: 11
